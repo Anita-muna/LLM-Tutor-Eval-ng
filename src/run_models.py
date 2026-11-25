@@ -89,6 +89,9 @@ def main():
                 continue
 
             raw = ask(args.model, build_prompt(q))
+            if raw is None:
+                print(f"{q['id']}: failed after retries, not saved")
+                continue
             predicted = parse_letter(raw) if raw is not None else None
 
             record = {
